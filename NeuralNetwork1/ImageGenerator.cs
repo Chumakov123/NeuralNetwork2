@@ -10,7 +10,7 @@ namespace NeuralNetwork1
     /// <summary>
     /// Тип фигуры
     /// </summary>
-    public enum FigureType : byte { Triangle = 0, Rectangle, Circle, Sinusiod, Undef };
+    public enum FigureType : byte { Play = 0, Pause, Stop, Rec, SpeedUp, SpeedDown, NextFrame, PrevFrame, SkipForward, SkipBackward, Undef };
     
     public class GenerateImage
     {
@@ -159,7 +159,7 @@ namespace NeuralNetwork1
 
         public bool create_triangle()
         {
-            currentFigure = FigureType.Triangle;
+            currentFigure = FigureType.Play;
             Point leftUpper = GetLeftUpperPoint();
             Point downLeft = GetRightDownPoint();
             int centerX = 100 + FigureCenterGitter;
@@ -174,7 +174,7 @@ namespace NeuralNetwork1
 
         public bool create_rectangle()
         {
-            currentFigure = FigureType.Rectangle;
+            currentFigure = FigureType.Pause;
 
             Point leftUpper = GetLeftUpperPoint();
             Point downLeft = GetRightDownPoint();
@@ -188,7 +188,7 @@ namespace NeuralNetwork1
 
         public bool create_circle()
         {
-            currentFigure = FigureType.Circle;
+            currentFigure = FigureType.Stop;
 
             Point center = GetCenterPoint();
 
@@ -205,7 +205,7 @@ namespace NeuralNetwork1
 
         public bool create_sin()
         {
-            currentFigure = FigureType.Sinusiod;
+            currentFigure = FigureType.Rec;
 
             Point leftUpper = GetLeftUpperPoint();
             Point downLeft = GetRightDownPoint();
@@ -232,10 +232,10 @@ namespace NeuralNetwork1
             ClearImage();
             switch (type)
             {
-                case FigureType.Rectangle : create_rectangle(); break;
-                case FigureType.Triangle  : create_triangle(); break;
-                case FigureType.Circle    : create_circle(); break;
-                case FigureType.Sinusiod  : create_sin(); break;
+                case FigureType.Pause : create_rectangle(); break;
+                case FigureType.Play  : create_triangle(); break;
+                case FigureType.Stop    : create_circle(); break;
+                case FigureType.Rec  : create_sin(); break;
 
                 default:
                     type = FigureType.Undef;

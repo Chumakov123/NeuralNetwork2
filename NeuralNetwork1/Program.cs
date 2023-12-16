@@ -23,5 +23,18 @@ namespace NeuralNetwork1
                 {"Студентческий персептрон", structure => new StudentNetwork(structure)},
             }));
         }
+        static Dictionary<FigureType, string> names = new Dictionary<FigureType, string>
+        { 
+            {FigureType.Play, "Старт"},
+            {FigureType.Pause, "Пауза"},
+            {FigureType.Stop, "Стоп"},
+            {FigureType.Rec, "Запись"},
+            {FigureType.SpeedUp, "Перемотка вперед"},
+            {FigureType.SpeedDown, "Перемотка назад"},
+            {FigureType.SkipForward, "Следующие видео"},
+            {FigureType.SkipBackward, "Предыдущее видео"},
+            {FigureType.NextFrame, "Следующий кадр"},
+            {FigureType.PrevFrame, "Предыдущий кадр"},
+        };
     }
 }
