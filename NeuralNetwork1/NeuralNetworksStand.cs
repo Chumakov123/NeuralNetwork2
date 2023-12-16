@@ -1,15 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AForge.Video;
+using AForge.Video.DirectShow;
+using System.Diagnostics;
+using System.IO.Ports;
+using System.Globalization;
+using AForge.WindowsForms;
 
 namespace NeuralNetwork1
 {
+    delegate void FormUpdateDelegate();
     public partial class NeuralNetworksStand : Form
     {
+        WebCamera webCamera = new WebCamera();
         /// <summary>
         /// Генератор изображений (образов)
         /// </summary>
@@ -212,6 +223,16 @@ namespace NeuralNetwork1
         private void testNetButton_MouseEnter(object sender, EventArgs e)
         {
             infoStatusLabel.Text = "Тестировать нейросеть на тестовой выборке такого же размера";
+        }
+
+        private void bt_open_webcam_Click(object sender, EventArgs e)
+        {
+            if (webCamera.IsDisposed)
+            {
+                webCamera = new WebCamera();
+            }
+            if (!webCamera.Visible)
+                webCamera.Show();
         }
     }
 }
