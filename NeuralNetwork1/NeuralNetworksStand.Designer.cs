@@ -61,6 +61,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.bt_load_dataset = new System.Windows.Forms.Button();
             this.bt_create_dataset = new System.Windows.Forms.Button();
+            this.bt_gen_sets = new System.Windows.Forms.Button();
             label2 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
@@ -220,7 +221,7 @@
             // 
             this.classCounter.Location = new System.Drawing.Point(167, 125);
             this.classCounter.Maximum = new decimal(new int[] {
-            4,
+            9,
             0,
             0,
             0});
@@ -334,7 +335,7 @@
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(817, 129);
+            this.label9.Location = new System.Drawing.Point(817, 165);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(20, 140);
             this.label9.TabIndex = 7;
@@ -414,11 +415,12 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.bt_gen_sets);
             this.groupBox2.Controls.Add(this.bt_load_dataset);
             this.groupBox2.Controls.Add(this.bt_create_dataset);
             this.groupBox2.Location = new System.Drawing.Point(814, 40);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(152, 86);
+            this.groupBox2.Size = new System.Drawing.Size(152, 113);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Датасет";
@@ -442,6 +444,16 @@
             this.bt_create_dataset.Text = "Создать";
             this.bt_create_dataset.UseVisualStyleBackColor = true;
             this.bt_create_dataset.Click += new System.EventHandler(this.bt_create_dataset_Click);
+            // 
+            // bt_gen_sets
+            // 
+            this.bt_gen_sets.Location = new System.Drawing.Point(7, 81);
+            this.bt_gen_sets.Name = "bt_gen_sets";
+            this.bt_gen_sets.Size = new System.Drawing.Size(139, 23);
+            this.bt_gen_sets.TabIndex = 2;
+            this.bt_gen_sets.Text = "Новая выборка";
+            this.bt_gen_sets.UseVisualStyleBackColor = true;
+            this.bt_gen_sets.Click += new System.EventHandler(this.bt_gen_sets_Click);
             // 
             // NeuralNetworksStand
             // 
@@ -511,6 +523,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button bt_load_dataset;
         private System.Windows.Forms.Button bt_create_dataset;
+        private System.Windows.Forms.Button bt_gen_sets;
     }
 }
 

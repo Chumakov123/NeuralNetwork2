@@ -57,6 +57,8 @@ namespace NeuralNetwork1
             generator.FigureCount = (int) classCounter.Value;
             button3_Click(this, null);
             pictureBox1.Image = Properties.Resources.Title;
+            DatasetManager.FigureCount = (int)classCounter.Value;
+            DatasetManager.SetSize = (int)TrainingSizeCounter.Value;
         }
 
         public void UpdateLearningInfo(double progress, double error, TimeSpan elapsedTime)
@@ -108,8 +110,9 @@ namespace NeuralNetwork1
             //  Создаём новую обучающую выборку
             SamplesSet samples = new SamplesSet();
 
-            for (int i = 0; i < training_size; i++)
-                samples.AddSample(generator.GenerateFigure());
+            //for (int i = 0; i < training_size; i++)
+            //    samples.AddSample(generator.GenerateFigure());
+            samples = DatasetManager.TrainSet;
             try
             {
                 //  Обучение запускаем асинхронно, чтобы не блокировать форму
@@ -148,8 +151,9 @@ namespace NeuralNetwork1
             //  Создаём новую обучающую выборку
             SamplesSet samples = new SamplesSet();
 
-            for (int i = 0; i < (int) TrainingSizeCounter.Value; i++)
-                samples.AddSample(generator.GenerateFigure());
+            samples = DatasetManager.TestSet;
+            //for (int i = 0; i < (int) TrainingSizeCounter.Value; i++)
+            //    samples.AddSample(generator.GenerateFigure());
 
             double accuracy = samples.TestNeuralNetwork(Net);
 
@@ -237,12 +241,20 @@ namespace NeuralNetwork1
 
         private void bt_create_dataset_Click(object sender, EventArgs e)
         {
-            //TODO
+            DatasetManager.SetSize = (int)TrainingSizeCounter.Value;
+            DatasetManager.CreateDataset();
         }
 
         private void bt_load_dataset_Click(object sender, EventArgs e)
         {
-            //TODO
+            DatasetManager.SetSize = (int)TrainingSizeCounter.Value;
+            DatasetManager.LoadDataset();
+        }
+
+        private void bt_gen_sets_Click(object sender, EventArgs e)
+        {
+            DatasetManager.SetSize = (int)TrainingSizeCounter.Value;
+            DatasetManager.GenerateSets();
         }
     }
 }

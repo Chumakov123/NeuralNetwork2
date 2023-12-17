@@ -301,7 +301,7 @@ namespace NeuralNetwork1
             }
             cropFilter = new AForge.Imaging.Filters.Crop(new Rectangle(lx, ly, rx - lx, ry - ly));
             unmanaged = cropFilter.Apply(unmanaged);
-            scaleFilter = new AForge.Imaging.Filters.ResizeBilinear(48, 48);
+            scaleFilter = new AForge.Imaging.Filters.ResizeBilinear(Program.imgSize, Program.imgSize);
             unmanaged = scaleFilter.Apply(unmanaged);
             Threshold thresholdFilter = new Threshold(1);
             unmanaged = thresholdFilter.Apply(unmanaged);

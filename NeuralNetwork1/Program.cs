@@ -23,7 +23,9 @@ namespace NeuralNetwork1
                 {"Студентческий персептрон", structure => new StudentNetwork(structure)},
             }));
         }
+        //Размер обработанного изображения
         public const int imgSize = 48;
+
         public static Dictionary<FigureType, string> titles = new Dictionary<FigureType, string>
         { 
             {FigureType.Play, "Старт"},
@@ -37,18 +39,18 @@ namespace NeuralNetwork1
             {FigureType.NextFrame, "Следующий кадр"},
             {FigureType.PrevFrame, "Предыдущий кадр"},
         };
-        public static Dictionary<FigureType, string> folders = new Dictionary<FigureType, string>
+        public static Dictionary<string, FigureType> folders = new Dictionary<string, FigureType>
         {
-            { FigureType.Play, "play"},
-            { FigureType.Pause, "pause" },
-            { FigureType.Stop, "stop" },
-            { FigureType.Rec, "rec" },
-            { FigureType.SpeedUp, "speed_up" },
-            { FigureType.SpeedDown, "speed_down" },
-            { FigureType.SkipBackward, "skip_backward" },
-            { FigureType.SkipForward, "skip_forward" },
-            { FigureType.NextFrame, "frame_next" },
-            { FigureType.PrevFrame, "frame_prev" }
+            { "play", FigureType.Play},
+            { "pause", FigureType.Pause },
+            { "stop", FigureType.Stop },
+            { "rec", FigureType.Rec },
+            { "speed_up", FigureType.SpeedUp },
+            { "speed_down", FigureType.SpeedDown  },
+            { "skip_backward", FigureType.SkipBackward },
+            { "skip_forward", FigureType.SkipForward },
+            { "frame_next", FigureType.NextFrame },
+            { "frame_prev" , FigureType.PrevFrame}
         };
     }
 }

@@ -65,6 +65,7 @@ namespace AForge.WindowsForms
 
             sw.Stop();
             ticksLabel.Text = "Тики : " + sw.Elapsed.ToString();
+            controller.settings.processImg = checkBox1.Checked;
             originalImageBox.Image = controller.GetOriginalImage();
             processedImgBox.Image = controller.GetProcessedImage();
         }
@@ -151,16 +152,6 @@ namespace AForge.WindowsForms
         {
             controller.settings.threshold = (byte)tresholdTrackBar.Value;
             controller.settings.differenceLim = (float)tresholdTrackBar.Value / tresholdTrackBar.Maximum;
-        }
-
-        private void borderTrackBar_ValueChanged(object sender, EventArgs e)
-        {
-            controller.settings.border = borderTrackBar.Value;
-        }
-
-        private void marginTrackBar_ValueChanged(object sender, EventArgs e)
-        {
-            controller.settings.margin = marginTrackBar.Value;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
