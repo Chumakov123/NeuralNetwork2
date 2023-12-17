@@ -17,7 +17,6 @@ namespace NeuralNetwork1
     class Controller
     {
         //  Технически должен запускаться в отдельном потоке
-
         /// <summary>
         /// Возможные состояния - ожидание кадра, распознавание, анализ, движение.
         /// Их бы в какой-нибудь класс-диспетчер засунуть
@@ -71,7 +70,11 @@ namespace NeuralNetwork1
         {
             formUpdateDelegate = updater;
         }
-        
+        public Controller()
+        {
+
+        }
+
         /// <summary>
         /// Задаёт изображение для обработки
         /// </summary>

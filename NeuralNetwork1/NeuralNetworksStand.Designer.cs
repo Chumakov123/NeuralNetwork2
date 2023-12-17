@@ -58,6 +58,9 @@
             this.вапрвапрToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusLabel = new System.Windows.Forms.Label();
             this.bt_open_webcam = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.bt_load_dataset = new System.Windows.Forms.Button();
+            this.bt_create_dataset = new System.Windows.Forms.Button();
             label2 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
@@ -70,6 +73,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.EpochesCounter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrainingSizeCounter)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -121,7 +125,7 @@
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(9, 10);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(500, 500);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -323,19 +327,18 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(556, 367);
+            this.label8.Location = new System.Drawing.Point(837, 181);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(0, 13);
             this.label8.TabIndex = 6;
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(522, 367);
+            this.label9.Location = new System.Drawing.Point(817, 129);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(16, 52);
+            this.label9.Size = new System.Drawing.Size(20, 140);
             this.label9.TabIndex = 7;
-            this.label9.Text = "0:\r\n1:\r\n2:\r\n3:";
+            this.label9.Text = "0:\r\n1:\r\n2:\r\n3:4:5:6:7:8:9:";
             // 
             // trainOneButton
             // 
@@ -363,7 +366,7 @@
             this.infoStatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 519);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(815, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(978, 22);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -401,19 +404,51 @@
             // 
             // bt_open_webcam
             // 
-            this.bt_open_webcam.Location = new System.Drawing.Point(730, 480);
+            this.bt_open_webcam.Location = new System.Drawing.Point(646, 480);
             this.bt_open_webcam.Name = "bt_open_webcam";
-            this.bt_open_webcam.Size = new System.Drawing.Size(78, 30);
+            this.bt_open_webcam.Size = new System.Drawing.Size(131, 30);
             this.bt_open_webcam.TabIndex = 16;
             this.bt_open_webcam.Text = "Веб-камера";
             this.bt_open_webcam.UseVisualStyleBackColor = true;
             this.bt_open_webcam.Click += new System.EventHandler(this.bt_open_webcam_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.bt_load_dataset);
+            this.groupBox2.Controls.Add(this.bt_create_dataset);
+            this.groupBox2.Location = new System.Drawing.Point(814, 40);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(152, 86);
+            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Датасет";
+            // 
+            // bt_load_dataset
+            // 
+            this.bt_load_dataset.Location = new System.Drawing.Point(6, 51);
+            this.bt_load_dataset.Name = "bt_load_dataset";
+            this.bt_load_dataset.Size = new System.Drawing.Size(140, 23);
+            this.bt_load_dataset.TabIndex = 1;
+            this.bt_load_dataset.Text = "Загрузить";
+            this.bt_load_dataset.UseVisualStyleBackColor = true;
+            this.bt_load_dataset.Click += new System.EventHandler(this.bt_load_dataset_Click);
+            // 
+            // bt_create_dataset
+            // 
+            this.bt_create_dataset.Location = new System.Drawing.Point(6, 22);
+            this.bt_create_dataset.Name = "bt_create_dataset";
+            this.bt_create_dataset.Size = new System.Drawing.Size(140, 23);
+            this.bt_create_dataset.TabIndex = 0;
+            this.bt_create_dataset.Text = "Создать";
+            this.bt_create_dataset.UseVisualStyleBackColor = true;
+            this.bt_create_dataset.Click += new System.EventHandler(this.bt_create_dataset_Click);
+            // 
             // NeuralNetworksStand
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(815, 541);
+            this.ClientSize = new System.Drawing.Size(978, 541);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.bt_open_webcam);
             this.Controls.Add(this.StatusLabel);
             this.Controls.Add(label7);
@@ -427,7 +462,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "NeuralNetworksStand";
             this.Text = "Банальный студенческий перспетрон";
@@ -440,6 +475,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.TrainingSizeCounter)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -472,6 +508,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label StatusLabel;
         private System.Windows.Forms.Button bt_open_webcam;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button bt_load_dataset;
+        private System.Windows.Forms.Button bt_create_dataset;
     }
 }
 

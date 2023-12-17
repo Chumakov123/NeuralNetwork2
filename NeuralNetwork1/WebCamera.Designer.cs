@@ -36,6 +36,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.processedImgBox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tresholdTrackBar = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,11 +45,8 @@
             this.borderTrackBar = new System.Windows.Forms.TrackBar();
             this.statusLabel = new System.Windows.Forms.Label();
             this.ticksLabel = new System.Windows.Forms.Label();
-            this.controlPanel = new System.Windows.Forms.Panel();
-            this.ProcessButton = new System.Windows.Forms.Button();
             this.PlayButton = new System.Windows.Forms.Button();
             this.resolutionsBox = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).BeginInit();
             this.panel1.SuspendLayout();
@@ -57,14 +55,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.tresholdTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.marginTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.borderTrackBar)).BeginInit();
-            this.controlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmbVideoSource
             // 
             this.cmbVideoSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmbVideoSource.FormattingEnabled = true;
-            this.cmbVideoSource.Location = new System.Drawing.Point(13, 578);
+            this.cmbVideoSource.Location = new System.Drawing.Point(16, 578);
             this.cmbVideoSource.Name = "cmbVideoSource";
             this.cmbVideoSource.Size = new System.Drawing.Size(219, 21);
             this.cmbVideoSource.TabIndex = 1;
@@ -74,7 +71,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 562);
+            this.label1.Location = new System.Drawing.Point(12, 560);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 2;
@@ -84,7 +81,7 @@
             // 
             this.StartButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.StartButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.StartButton.Location = new System.Drawing.Point(238, 596);
+            this.StartButton.Location = new System.Drawing.Point(245, 598);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(125, 30);
             this.StartButton.TabIndex = 3;
@@ -126,6 +123,7 @@
             this.processedImgBox.Location = new System.Drawing.Point(0, 0);
             this.processedImgBox.Name = "processedImgBox";
             this.processedImgBox.Size = new System.Drawing.Size(441, 441);
+            this.processedImgBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.processedImgBox.TabIndex = 0;
             this.processedImgBox.TabStop = false;
             // 
@@ -141,8 +139,21 @@
             this.panel2.Controls.Add(this.borderTrackBar);
             this.panel2.Location = new System.Drawing.Point(519, 463);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(442, 202);
+            this.panel2.Size = new System.Drawing.Size(442, 188);
             this.panel2.TabIndex = 18;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(174, 91);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(86, 17);
+            this.checkBox1.TabIndex = 24;
+            this.checkBox1.Text = "Обработать";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // label2
             // 
@@ -220,43 +231,21 @@
             // ticksLabel
             // 
             this.ticksLabel.AutoSize = true;
-            this.ticksLabel.Location = new System.Drawing.Point(376, 582);
+            this.ticksLabel.Location = new System.Drawing.Point(376, 574);
             this.ticksLabel.Name = "ticksLabel";
             this.ticksLabel.Size = new System.Drawing.Size(131, 13);
             this.ticksLabel.TabIndex = 30;
             this.ticksLabel.Text = "Ticks for frame processing";
             // 
-            // controlPanel
-            // 
-            this.controlPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.controlPanel.Controls.Add(this.ProcessButton);
-            this.controlPanel.Controls.Add(this.PlayButton);
-            this.controlPanel.Enabled = false;
-            this.controlPanel.Location = new System.Drawing.Point(520, 672);
-            this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(444, 59);
-            this.controlPanel.TabIndex = 33;
-            // 
-            // ProcessButton
-            // 
-            this.ProcessButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ProcessButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ProcessButton.Location = new System.Drawing.Point(166, 13);
-            this.ProcessButton.Name = "ProcessButton";
-            this.ProcessButton.Size = new System.Drawing.Size(125, 30);
-            this.ProcessButton.TabIndex = 26;
-            this.ProcessButton.Text = "Обработать";
-            this.ProcessButton.UseVisualStyleBackColor = true;
-            // 
             // PlayButton
             // 
             this.PlayButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.PlayButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.PlayButton.Location = new System.Drawing.Point(297, 13);
+            this.PlayButton.Location = new System.Drawing.Point(801, 661);
             this.PlayButton.Name = "PlayButton";
-            this.PlayButton.Size = new System.Drawing.Size(125, 30);
+            this.PlayButton.Size = new System.Drawing.Size(160, 30);
             this.PlayButton.TabIndex = 25;
-            this.PlayButton.Text = "Играть";
+            this.PlayButton.Text = "Распознать";
             this.PlayButton.UseVisualStyleBackColor = true;
             // 
             // resolutionsBox
@@ -264,29 +253,18 @@
             this.resolutionsBox.AllowDrop = true;
             this.resolutionsBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.resolutionsBox.FormattingEnabled = true;
-            this.resolutionsBox.Location = new System.Drawing.Point(14, 605);
+            this.resolutionsBox.Location = new System.Drawing.Point(16, 603);
             this.resolutionsBox.Name = "resolutionsBox";
             this.resolutionsBox.Size = new System.Drawing.Size(218, 21);
             this.resolutionsBox.TabIndex = 34;
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(174, 91);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(86, 17);
-            this.checkBox1.TabIndex = 24;
-            this.checkBox1.Text = "Обработать";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // MainForm
+            // WebCamera
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(973, 742);
+            this.ClientSize = new System.Drawing.Size(973, 700);
+            this.Controls.Add(this.PlayButton);
             this.Controls.Add(this.resolutionsBox);
-            this.Controls.Add(this.controlPanel);
             this.Controls.Add(this.ticksLabel);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.panel2);
@@ -297,7 +275,7 @@
             this.Controls.Add(this.cmbVideoSource);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
-            this.Name = "MainForm";
+            this.Name = "WebCamera";
             this.Text = "Распознавалка";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
@@ -310,7 +288,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tresholdTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.marginTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.borderTrackBar)).EndInit();
-            this.controlPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -332,8 +309,6 @@
         private System.Windows.Forms.Label ticksLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TrackBar tresholdTrackBar;
-        private System.Windows.Forms.Panel controlPanel;
-        private System.Windows.Forms.Button ProcessButton;
         private System.Windows.Forms.Button PlayButton;
         private System.Windows.Forms.PictureBox processedImgBox;
         private System.Windows.Forms.ComboBox resolutionsBox;

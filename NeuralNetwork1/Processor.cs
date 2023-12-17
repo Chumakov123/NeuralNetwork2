@@ -87,18 +87,28 @@ namespace NeuralNetwork1
         {
         }
 
-        public bool ProcessImage(Bitmap bitmap)
+        public bool ProcessImage(Bitmap bitmap, bool checkAspectRatio = true)
         {
             // На вход поступает необработанное изображение с веб-камеры
 
             //  Минимальная сторона изображения (обычно это высота)
-            if (bitmap.Height > bitmap.Width)
-                throw new Exception("К такой забавной камере меня жизнь не готовила!");
-            //  Можно было, конечено, и не кидаться эксепшенами в истерике, но идите и купите себе нормальную камеру!
-            int side = bitmap.Height;
+            if (checkAspectRatio)
+            {
+                if (bitmap.Height > bitmap.Width)
+                    throw new Exception("К такой забавной камере меня жизнь не готовила!");
+                //  Можно было, конечено, и не кидаться эксепшенами в истерике, но идите и купите себе нормальную камеру!
+                int side = System.Math.Min(bitmap.Height, bitmap.Width);
+
+                AForge.Imaging.Filters.Crop cropFilter = new AForge.Imaging.Filters.Crop(new Rectangle((bitmap.Width - bitmap.Height) / 2, 0, side, side));
+                original = cropFilter.Apply(bitmap);
+            }
+            else
+            {
+                original = bitmap;
+            }
 
             //  Отпиливаем границы, но не более половины изображения
-            if (side < 4 * settings.border) settings.border = side / 4;
+            /*if (side < 4 * settings.border) settings.border = side / 4;
             side -= 2 * settings.border;
             
             //  Мы сейчас занимаемся тем, что красиво оформляем входной кадр, чтобы вывести его на форму
@@ -112,28 +122,28 @@ namespace NeuralNetwork1
             
             g.DrawImage(bitmap, new Rectangle(0, 0, original.Width, original.Height), cropRect, GraphicsUnit.Pixel);
             Pen p = new Pen(Color.Red);
-            p.Width = 1;
+            p.Width = 1;*/
 
             //  Теперь всю эту муть пилим в обработанное изображение
             AForge.Imaging.Filters.Grayscale grayFilter = new AForge.Imaging.Filters.Grayscale(0.2125, 0.7154, 0.0721);
             var uProcessed = grayFilter.Apply(AForge.Imaging.UnmanagedImage.FromManagedImage(original));
 
-            
-            int blockWidth = original.Width / settings.blocksCount;
+
+            /*int blockWidth = original.Width / settings.blocksCount;
             int blockHeight = original.Height / settings.blocksCount;
             for (int r = 0; r < settings.blocksCount; ++r)
                 for (int c = 0; c < settings.blocksCount; ++c)
                 {
                     //  Тут ещё обработку сделать
                     g.DrawRectangle(p, new Rectangle(c * blockWidth, r * blockHeight, blockWidth, blockHeight));
-                }
+                }*/
 
 
             //  Масштабируем изображение до 500x500 - этого достаточно
             AForge.Imaging.Filters.ResizeBilinear scaleFilter = new AForge.Imaging.Filters.ResizeBilinear(settings.orignalDesiredSize.Width, settings.orignalDesiredSize.Height);
             uProcessed = scaleFilter.Apply(uProcessed);
             original = scaleFilter.Apply(original);
-            g = Graphics.FromImage(original);
+            Graphics g = Graphics.FromImage(original);
             //  Пороговый фильтр применяем. Величина порога берётся из настроек, и меняется на форме
             AForge.Imaging.Filters.BradleyLocalThresholding threshldFilter = new AForge.Imaging.Filters.BradleyLocalThresholding();
             threshldFilter.PixelBrightnessDifferenceLimit = settings.differenceLim;
@@ -142,11 +152,31 @@ namespace NeuralNetwork1
 
             if (settings.processImg)
             {
-             
+
                 string info = processSample(ref uProcessed);
                 Font f = new Font(FontFamily.GenericSansSerif, 20);
                 g.DrawString(info, f, Brushes.Black, 30, 30);
             }
+            processed = uProcessed.ToManagedImage();
+
+            /*Rectangle rect = new Rectangle(0, 0, processed.Width, processed.Height);
+            BitmapData bmpData = processed.LockBits(rect, ImageLockMode.ReadOnly, processed.PixelFormat);
+            unsafe
+            {
+                byte* ptr = (byte*)bmpData.Scan0;
+                int heightInPixels = bmpData.Height;
+                int widthInBytes = bmpData.Stride;
+                for (int y = 0; y < heightInPixels; y++)
+                {
+                    byte* currentLine = ptr + (y * bmpData.Stride);
+                    for (int x = 0; x < widthInBytes; x = x + 3)
+                    {
+                        byte grayValue = currentLine[x];
+                        Console.WriteLine($"Пиксель [{x / 3}, {y}]: Яркость - {grayValue}");
+                    }
+                }
+                Console.WriteLine("---------------------------------------------------------------");
+            }*/
 
             //  Получить значения сенсоров из обработанного изображения размера 100x100
 
@@ -161,8 +191,6 @@ namespace NeuralNetwork1
             //        }
 
 
-            processed = uProcessed.ToManagedImage();
-
             return true;
         }
 
@@ -170,7 +198,7 @@ namespace NeuralNetwork1
         /// Обработка одного сэмпла
         /// </summary>
         /// <param name="index"></param>
-        private string processSample(ref AForge.Imaging.UnmanagedImage unmanaged)
+        private string processSample(ref UnmanagedImage unmanaged)
         {
             string rez = "Обработка";
 
@@ -188,7 +216,7 @@ namespace NeuralNetwork1
             // Упорядочиваем по размеру
             bc.ObjectsOrder = AForge.Imaging.ObjectsOrder.Size;
             // Обрабатываем картинку
-            
+
             bc.ProcessImage(unmanaged);
 
             Rectangle[] rects = bc.GetObjectsRectangles();
@@ -213,7 +241,13 @@ namespace NeuralNetwork1
                 if (rx < rects[i].X + rects[i].Width) rx = rects[i].X + rects[i].Width;
                 if (ry < rects[i].Y + rects[i].Height) ry = rects[i].Y + rects[i].Height;
             }
-
+            if (rx <= lx || ry <= ly)
+            {
+                rx = unmanaged.Width;
+                ry = unmanaged.Height;
+                lx = 0;
+                ly = 0;
+            }
             // Обрезаем края, оставляя только центральные блобчики
             AForge.Imaging.Filters.Crop cropFilter = new AForge.Imaging.Filters.Crop(new Rectangle(lx, ly, rx - lx, ry - ly));
             unmanaged = cropFilter.Apply(unmanaged);
@@ -221,6 +255,95 @@ namespace NeuralNetwork1
             //  Масштабируем до 100x100
             AForge.Imaging.Filters.ResizeBilinear scaleFilter = new AForge.Imaging.Filters.ResizeBilinear(100, 100);
             unmanaged = scaleFilter.Apply(unmanaged);
+
+            lx = unmanaged.Width;
+            ly = unmanaged.Height;
+            rx = 0;
+            ry = 0;
+            unsafe
+            {
+                byte* ptr = (byte*)unmanaged.ImageData.ToPointer();
+
+                int width = unmanaged.Width;
+                int height = unmanaged.Height;
+                int stride = unmanaged.Stride;
+
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        byte pixelValue = ptr[y * stride + x];
+                        if (lx > x && pixelValue > 200) lx = x;
+                        if (ly > y && pixelValue > 200) ly = y;
+                        if (rx < x && pixelValue > 200) rx = x;
+                        if (ry < y && pixelValue > 200) ry = y;
+                    }
+                }
+            }
+            if (rx <= lx || ry <= ly)
+            {
+                rx = unmanaged.Width;
+                ry = unmanaged.Height;
+                lx = 0;
+                ly = 0;
+            }
+            if (rx - lx < ry - ly)
+            {
+                int centerX = (rx + lx) / 2;
+                rx = centerX + (ry - ly) / 2;
+                lx = centerX - (ry - ly) / 2;
+            }
+            else
+            {
+                int centerY = (ry + ly) / 2;
+                ry = centerY + (rx - lx) / 2;
+                ly = centerY - (rx - lx) / 2;
+            }
+            cropFilter = new AForge.Imaging.Filters.Crop(new Rectangle(lx, ly, rx - lx, ry - ly));
+            unmanaged = cropFilter.Apply(unmanaged);
+            scaleFilter = new AForge.Imaging.Filters.ResizeBilinear(48, 48);
+            unmanaged = scaleFilter.Apply(unmanaged);
+            Threshold thresholdFilter = new Threshold(1);
+            unmanaged = thresholdFilter.Apply(unmanaged);
+            /*int sumX = 0;
+            int sumY = 0;
+            int count = 0;
+            unsafe
+            {
+                byte* ptr = (byte*)unmanaged.ImageData.ToPointer();
+
+                int width = unmanaged.Width;
+                int height = unmanaged.Height;
+                int stride = unmanaged.Stride;
+
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        byte pixelValue = ptr[y * stride + x];
+                        if (pixelValue > 200)
+                        {
+                            sumX += x;
+                            sumY += y;
+                            count++;
+                        }
+                    }
+                }
+            }
+
+            float meanX = count == 0 ? unmanaged.Width / 2 : sumX / count;
+            float meanY = count == 0 ? unmanaged.Height / 2 : sumY / count;
+            Point imageCenter = new Point(unmanaged.Width / 2, unmanaged.Height / 2);
+            Point delta = new Point(imageCenter.X - meanX, imageCenter.Y - meanY);
+            if ((int)delta.X + 8 < 0) delta.X = -8;
+            if ((int)delta.Y + 8 < 0) delta.Y = -8;
+            Bitmap centeredBitmap = new Bitmap(64, 64);
+            using (Graphics g = Graphics.FromImage(centeredBitmap))
+            {
+                g.Clear(Color.Black); // или другой фоновый цвет
+                g.DrawImage(unmanaged.ToManagedImage(), new Rectangle(8, 8, unmanaged.Width, unmanaged.Height));
+            }
+            processed = centeredBitmap;*/
 
             return rez;
         }

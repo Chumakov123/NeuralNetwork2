@@ -23,7 +23,8 @@ namespace NeuralNetwork1
                 {"Студентческий персептрон", structure => new StudentNetwork(structure)},
             }));
         }
-        static Dictionary<FigureType, string> names = new Dictionary<FigureType, string>
+        public const int imgSize = 48;
+        public static Dictionary<FigureType, string> titles = new Dictionary<FigureType, string>
         { 
             {FigureType.Play, "Старт"},
             {FigureType.Pause, "Пауза"},
@@ -35,6 +36,19 @@ namespace NeuralNetwork1
             {FigureType.SkipBackward, "Предыдущее видео"},
             {FigureType.NextFrame, "Следующий кадр"},
             {FigureType.PrevFrame, "Предыдущий кадр"},
+        };
+        public static Dictionary<FigureType, string> folders = new Dictionary<FigureType, string>
+        {
+            { FigureType.Play, "play"},
+            { FigureType.Pause, "pause" },
+            { FigureType.Stop, "stop" },
+            { FigureType.Rec, "rec" },
+            { FigureType.SpeedUp, "speed_up" },
+            { FigureType.SpeedDown, "speed_down" },
+            { FigureType.SkipBackward, "skip_backward" },
+            { FigureType.SkipForward, "skip_forward" },
+            { FigureType.NextFrame, "frame_next" },
+            { FigureType.PrevFrame, "frame_prev" }
         };
     }
 }

@@ -234,5 +234,15 @@ namespace NeuralNetwork1
             if (!webCamera.Visible)
                 webCamera.Show();
         }
+
+        private void bt_create_dataset_Click(object sender, EventArgs e)
+        {
+            //TODO
+        }
+
+        private void bt_load_dataset_Click(object sender, EventArgs e)
+        {
+            //TODO
+        }
     }
 }
