@@ -42,11 +42,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.marginTrackBar = new System.Windows.Forms.TrackBar();
-            this.borderTrackBar = new System.Windows.Forms.TrackBar();
             this.statusLabel = new System.Windows.Forms.Label();
             this.ticksLabel = new System.Windows.Forms.Label();
             this.PlayButton = new System.Windows.Forms.Button();
             this.resolutionsBox = new System.Windows.Forms.ComboBox();
+            this.borderTrackBar = new System.Windows.Forms.TrackBar();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).BeginInit();
             this.panel1.SuspendLayout();
@@ -206,18 +206,6 @@
             this.marginTrackBar.Value = 10;
             this.marginTrackBar.ValueChanged += new System.EventHandler(this.marginTrackBar_ValueChanged);
             // 
-            // borderTrackBar
-            // 
-            this.borderTrackBar.LargeChange = 60;
-            this.borderTrackBar.Location = new System.Drawing.Point(7, 31);
-            this.borderTrackBar.Maximum = 160;
-            this.borderTrackBar.Name = "borderTrackBar";
-            this.borderTrackBar.Size = new System.Drawing.Size(140, 45);
-            this.borderTrackBar.TabIndex = 18;
-            this.borderTrackBar.TickFrequency = 10;
-            this.borderTrackBar.Value = 40;
-            this.borderTrackBar.ValueChanged += new System.EventHandler(this.borderTrackBar_ValueChanged);
-            // 
             // statusLabel
             // 
             this.statusLabel.AutoSize = true;
@@ -257,6 +245,18 @@
             this.resolutionsBox.Name = "resolutionsBox";
             this.resolutionsBox.Size = new System.Drawing.Size(218, 21);
             this.resolutionsBox.TabIndex = 34;
+            // 
+            // borderTrackBar
+            // 
+            this.borderTrackBar.LargeChange = 60;
+            this.borderTrackBar.Location = new System.Drawing.Point(7, 31);
+            this.borderTrackBar.Maximum = 160;
+            this.borderTrackBar.Name = "borderTrackBar";
+            this.borderTrackBar.Size = new System.Drawing.Size(140, 45);
+            this.borderTrackBar.TabIndex = 18;
+            this.borderTrackBar.TickFrequency = 10;
+            this.borderTrackBar.Value = 40;
+            this.borderTrackBar.ValueChanged += new System.EventHandler(this.borderTrackBar_ValueChanged);
             // 
             // WebCamera
             // 
@@ -304,7 +304,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TrackBar marginTrackBar;
-        private System.Windows.Forms.TrackBar borderTrackBar;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Label ticksLabel;
         private System.Windows.Forms.Label label2;
@@ -313,6 +312,7 @@
         private System.Windows.Forms.PictureBox processedImgBox;
         private System.Windows.Forms.ComboBox resolutionsBox;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TrackBar borderTrackBar;
     }
 }
 
